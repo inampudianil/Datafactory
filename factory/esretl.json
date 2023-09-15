@@ -1,0 +1,9 @@
+{
+	"name": "esretl",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "855b4ed5-cfc1-4458-beeb-82ceb6860bb6",
+		"tenantId": "94c3e67c-9e2d-4800-a6b7-635d97882165"
+	}
+}
