@@ -94,13 +94,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_azureSqlDb",
+						"referenceName": "ds_azureSqlDb_vault",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_dl_esrweb",
+						"referenceName": "ds_dl_esrweb_vault",
 						"type": "DatasetReference"
 					}
 				]
