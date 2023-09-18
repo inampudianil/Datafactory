@@ -1,5 +1,5 @@
 {
-	"name": "Keyvault",
+	"name": "Copy_AZSql_to_DataLakeGen2",
 	"properties": {
 		"activities": [
 			{
@@ -94,13 +94,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_azureSqlDb_vault",
+						"referenceName": "ds_azureSqlDb",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_dl_esrweb_vault",
+						"referenceName": "ds_dl_esrweb",
 						"type": "DatasetReference"
 					}
 				]
