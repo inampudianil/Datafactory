@@ -39,7 +39,6 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     inferDriftedColumnTypes: true,",
-				"     limit: 2,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'FileName',",
 				"     multiLineRow: true,",
