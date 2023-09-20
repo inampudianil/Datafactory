@@ -1,0 +1,23 @@
+{
+	"name": "patientdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_esretl_esr_webdav",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "patient.txt",
+				"fileSystem": "src"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
