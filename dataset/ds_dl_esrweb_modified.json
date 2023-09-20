@@ -1,0 +1,22 @@
+{
+	"name": "ds_dl_esrweb_modified",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_esretl_esr_webdav",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "tgt"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
