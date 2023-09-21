@@ -116,8 +116,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> requiredcolumns",
-				"requiredcolumns split(ERROR_FUNCTION(''),",
-				"     disjoint: false) ~> split1@(, )"
+				"requiredcolumns split(SubTotal >3000,",
+				"     disjoint: false) ~> split1@(above3000, Lessthan3000)"
 			]
 		}
 	}
