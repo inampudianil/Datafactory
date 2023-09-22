@@ -29,6 +29,12 @@
 				},
 				{
 					"name": "split1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "exists1"
 				}
 			],
 			"scriptLines": [
@@ -117,7 +123,11 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> requiredcolumns",
 				"requiredcolumns split(SubTotal >3000,",
-				"     disjoint: false) ~> split1@(above3000, Lessthan3000)"
+				"     disjoint: false) ~> split1@(above3000, Lessthan3000)",
+				"split1@above3000 filter( between(SubTotal, 3000, 5000)) ~> filter1",
+				"filter1 exists(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     negate:false,",
+				"     broadcast: 'auto')~> exists1"
 			]
 		}
 	}
