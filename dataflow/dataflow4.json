@@ -1,0 +1,89 @@
+{
+	"name": "dataflow4",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_azureSqlDb",
+						"type": "DatasetReference"
+					},
+					"name": "data"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_azureSqlDb",
+						"type": "DatasetReference"
+					},
+					"name": "SalesOrderdetails"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "Rnk"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          SalesOrderID as integer,",
+				"          SalesOrderDetailID as integer,",
+				"          OrderQty as short,",
+				"          ProductID as integer,",
+				"          UnitPrice as decimal(19,4),",
+				"          UnitPriceDiscount as decimal(19,4),",
+				"          LineTotal as decimal(38,6),",
+				"          rowguid as string,",
+				"          ModifiedDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'select * from [SalesLT].[SalesOrderDetail]',",
+				"     format: 'query') ~> data",
+				"source(output(",
+				"          SalesOrderID as integer,",
+				"          SalesOrderDetailID as integer,",
+				"          OrderQty as short,",
+				"          ProductID as integer,",
+				"          UnitPrice as decimal(19,4),",
+				"          UnitPriceDiscount as decimal(19,4),",
+				"          LineTotal as decimal(38,6),",
+				"          rowguid as string,",
+				"          ModifiedDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'select * from [SalesLT].[SalesOrderDetail]',",
+				"     format: 'query') ~> SalesOrderdetails",
+				"SalesOrderdetails window(over(SalesOrderID),",
+				"     asc(SalesOrderID, true),",
+				"     Rnk = sum(LineTotal)) ~> Rnk",
+				"data, Rnk join(data@SalesOrderID == SalesOrderdetails@SalesOrderID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          SalesOrderID = data@SalesOrderID,",
+				"          Rnk",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 aggregate(groupBy(SalesOrderID),",
+				"     Sum_Order = max(Rnk)) ~> aggregate1"
+			]
+		}
+	}
+}
