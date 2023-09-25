@@ -18,6 +18,55 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "SQL Insert Binary Value",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[ETL].[usp_SourceBinaryValueInsert]",
+					"storedProcedureParameters": {
+						"NextSourceBinaryValue": {
+							"value": "",
+							"type": "Int64"
+						},
+						"SourceSchema": {
+							"value": "",
+							"type": "String"
+						},
+						"SourceTable": {
+							"value": "",
+							"type": "String"
+						},
+						"TargetSchema": {
+							"value": "",
+							"type": "String"
+						},
+						"TargetTable": {
+							"value": "",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_dwh_onprem",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
