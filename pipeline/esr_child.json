@@ -118,6 +118,39 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "SQL Truncate Table DimExternalSystemStage",
+				"type": "Script",
+				"dependsOn": [
+					{
+						"activity": "SQL Get Binary Values",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "ls_dwh_onprem",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "Truncate Table CoreETL.DimExternalSystemStage"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
 			}
 		],
 		"parameters": {
