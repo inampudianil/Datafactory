@@ -1,0 +1,12 @@
+{
+	"name": "dsoltp_onprem",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlonprem",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
