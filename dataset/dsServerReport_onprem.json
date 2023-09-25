@@ -1,0 +1,12 @@
+{
+	"name": "dsServerReport_onprem",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dwh_onprem",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}

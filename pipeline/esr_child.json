@@ -42,23 +42,38 @@
 					"storedProcedureName": "[ETL].[usp_SourceBinaryValueInsert]",
 					"storedProcedureParameters": {
 						"NextSourceBinaryValue": {
-							"value": "",
+							"value": {
+								"value": "@variables('test')",
+								"type": "Expression"
+							},
 							"type": "Int64"
 						},
 						"SourceSchema": {
-							"value": "",
+							"value": {
+								"value": "@variables('SourceSchema')",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"SourceTable": {
-							"value": "",
+							"value": {
+								"value": "@variables('SourceTable')",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"TargetSchema": {
-							"value": "",
+							"value": {
+								"value": "@variables('TargetSchema')",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"TargetTable": {
-							"value": "",
+							"value": {
+								"value": "@variables('TargetTable')",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
@@ -66,6 +81,42 @@
 				"linkedServiceName": {
 					"referenceName": "ls_dwh_onprem",
 					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SQL Get Binary Values",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "SQL Insert Binary Value",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": {
+							"value": "@\"SELECT \n LastSourceBinaryValue,\n NextSourceBinaryValue\nFROM\nETL.AdminTrackAuditColumn \nWHERE DeleteFlag = 0\nAND\n    SourceSchema =\" + variables('SourceSchema')+\n\"AND\n    SourceTable=\"+variables('SourceTable')+\n\"AND\n   TargetSchema=\"+variables('TargetSchema') +\n\"AND\n  TargetTable=\"+variables('TargetTable') +\";\"",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"isolationLevel": "ReadCommitted",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "dsServerReport_onprem",
+						"type": "DatasetReference"
+					}
 				}
 			}
 		],
@@ -77,6 +128,22 @@
 		"variables": {
 			"test": {
 				"type": "Integer"
+			},
+			"SourceSchema": {
+				"type": "String",
+				"defaultValue": "Core"
+			},
+			"SourceTable": {
+				"type": "String",
+				"defaultValue": "ExternalSystem"
+			},
+			"TargetSchema": {
+				"type": "String",
+				"defaultValue": "Core"
+			},
+			"TargetTable": {
+				"type": "String",
+				"defaultValue": "DimExternalSystem"
 			}
 		},
 		"annotations": []
