@@ -1,0 +1,7 @@
+{
+	"name": "esronpremir",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "ESR on Prem integration run time"
+	}
+}
