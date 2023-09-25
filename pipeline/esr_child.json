@@ -1,0 +1,35 @@
+{
+	"name": "esr_child",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "test",
+					"value": {
+						"value": "@pipeline().parameters.NextSourceBinaryValue",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"NextSourceBinaryValue": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"test": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
