@@ -51,6 +51,32 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "execute esr child",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "setting NextSourceBinaryValue",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "esr_child",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"NextSourceBinaryValue": {
+							"value": "@variables('NextSourceBinaryValue')",
+							"type": "Expression"
+						}
+					}
+				}
 			}
 		],
 		"variables": {
