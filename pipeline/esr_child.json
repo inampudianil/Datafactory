@@ -22,12 +22,12 @@
 		],
 		"parameters": {
 			"NextSourceBinaryValue": {
-				"type": "string"
+				"type": "int"
 			}
 		},
 		"variables": {
 			"test": {
-				"type": "String"
+				"type": "Integer"
 			}
 		},
 		"annotations": []
