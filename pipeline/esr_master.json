@@ -27,6 +27,30 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "setting NextSourceBinaryValue",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "lkup__sql_get_binary_values",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "NextSourceBinaryValue",
+					"value": {
+						"value": "@activity('lkup__sql_get_binary_values').output.firstRow.NextSourceBinaryValue",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
