@@ -15,10 +15,6 @@
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"parameters{",
-				"     LastSourceBinaryValue as long,",
-				"     NextSourceBinaryValue as long",
-				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     inferDriftedColumnTypes: true,",

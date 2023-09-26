@@ -175,7 +175,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "@\"SELECT\n       ess.ExternalSystemSnapshotKey\n      ,es.ExternalSystemKey\n      ,ess.StartUTCDateTime\n      ,ess.StartLocalDateTime\n      ,ess.EndUTCDateTime\n      ,ess.EndLocalDateTime\n      ,ess.ExternalSystemName\n      ,ess.ADTSystemFlag\n      ,ess.PharmacyInformationSystemFlag\n      ,ess.SubscriberFlag\n      ,ess.LegacyCIISafeFlag\n      ,ess.DataManagerFlag\n      ,ess.PISProvidesMedClassFlag\n      ,ess.PISProvidesTherapeuticClassFlag\n      ,ess.PISProvidesPureGenericNameFlag\n      ,ess.AllowPISItemEditFlag\n      ,ess.IgnorePISItemDeleteFlag\n      ,ess.IgnorePISItemUpdateFlag\n      ,ess.ProvidesAllergiesFlag\n      ,ess.ReplaceAllergiesFlag\n      ,ess.ProvidesPatientPhysicalObservationsFlag\n      ,ess.InboundDelayDurationAmount\n      ,ess.InboundDownDurationAmount\n      ,ess.ActiveConnectionFlag\n      ,ess.AllowTransferDischargeOfExternalEncounterFlag\n      ,ess.EditExternalScanCodeLinksFlag\n      ,ess.MessageLocalDateTimeZoneID\n      ,ess.MessageBehindCreatedFlag\n      ,ess.DiscontinuePharmacyOrderOnMergeFlag\n      ,ess.LeaveOfAbsenceActionabilityFlag\n      ,ess.AuthorizationSystemFlag\n      ,ess.DeleteFlag\n      ,COALESCE(ess.FirstSnapshotFlag, 0) AS FirstSnapshotFlag\n\t  ,COALESCE(ess.LastModifiedActorKey, '00000000-0000-0000-0000-000000000000') AS LastModifiedActorKey\n      ,ess.LastModifiedUTCDateTime\n      ,ess.LastModifiedBinaryValue\n  FROM \n       Core.ExternalSystemSnapshot ess\n  INNER JOIN\n       Core.ExternalSystem es\n  ON\n       ess.ExternalSystemKey = es.ExternalSystemKey\n  WHERE \n\t   CAST(ess.LastModifiedBinaryValue AS bigint) >\"+ activity('SQL Get Binary Values').output.firstRow.LastSourceBinaryValue +\" \n  AND \n  \t   CAST(ess.LastModifiedBinaryValue AS bigint) <=\" +activity('SQL Get Binary Values').output.firstRow.NextSourceBinaryValue + \";\"",
+							"value": "@concat('SELECT\n       ess.ExternalSystemSnapshotKey\n      ,es.ExternalSystemKey\n      ,ess.StartUTCDateTime\n      ,ess.StartLocalDateTime\n      ,ess.EndUTCDateTime\n      ,ess.EndLocalDateTime\n      ,ess.ExternalSystemName\n      ,ess.ADTSystemFlag\n      ,ess.PharmacyInformationSystemFlag\n      ,ess.SubscriberFlag\n      ,ess.LegacyCIISafeFlag\n      ,ess.DataManagerFlag\n      ,ess.PISProvidesMedClassFlag\n      ,ess.PISProvidesTherapeuticClassFlag\n      ,ess.PISProvidesPureGenericNameFlag\n      ,ess.AllowPISItemEditFlag\n      ,ess.IgnorePISItemDeleteFlag\n      ,ess.IgnorePISItemUpdateFlag\n      ,ess.ProvidesAllergiesFlag\n      ,ess.ReplaceAllergiesFlag\n      ,ess.ProvidesPatientPhysicalObservationsFlag\n      ,ess.InboundDelayDurationAmount\n      ,ess.InboundDownDurationAmount\n      ,ess.ActiveConnectionFlag\n      ,ess.AllowTransferDischargeOfExternalEncounterFlag\n      ,ess.EditExternalScanCodeLinksFlag\n      ,ess.MessageLocalDateTimeZoneID\n      ,ess.MessageBehindCreatedFlag\n      ,ess.DiscontinuePharmacyOrderOnMergeFlag\n      ,ess.LeaveOfAbsenceActionabilityFlag\n      ,ess.AuthorizationSystemFlag\n      ,ess.DeleteFlag\n      ,COALESCE(ess.FirstSnapshotFlag, 0) AS FirstSnapshotFlag\n\t  ,NULL AS LastModifiedActorKey\n      ,ess.LastModifiedUTCDateTime\n      ,ess.LastModifiedBinaryValue\n  FROM \n       Core.ExternalSystemSnapshot ess\n  INNER JOIN\n       Core.ExternalSystem es\n  ON\n       ess.ExternalSystemKey = es.ExternalSystemKey\n WHERE \n\t   CAST(ess.LastModifiedBinaryValue AS bigint) >', string(activity('SQL Get Binary Values').output.firstRow.LastSourceBinaryValue) , \n  'AND \n  \t   CAST(ess.LastModifiedBinaryValue AS bigint) <=',  string(activity('SQL Get Binary Values').output.firstRow.NextSourceBinaryValue) \n )",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -196,6 +196,440 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ExternalSystemSnapshotKey",
+									"type": "Guid",
+									"physicalType": "uniqueidentifier"
+								},
+								"sink": {
+									"name": "ExternalSystemSnapshotKey",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ExternalSystemKey",
+									"type": "Guid",
+									"physicalType": "uniqueidentifier"
+								},
+								"sink": {
+									"name": "ExternalSystemKey",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "StartUTCDateTime",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "StartUTCDateTime",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "StartLocalDateTime",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "StartLocalDateTime",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EndUTCDateTime",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "EndUTCDateTime",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EndLocalDateTime",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "EndLocalDateTime",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ExternalSystemName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ExternalSystemName",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ADTSystemFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "ADTSystemFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PharmacyInformationSystemFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "PharmacyInformationSystemFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SubscriberFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "SubscriberFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LegacyCIISafeFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "LegacyCIISafeFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DataManagerFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "DataManagerFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PISProvidesMedClassFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "PISProvidesMedClassFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PISProvidesTherapeuticClassFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "PISProvidesTherapeuticClassFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PISProvidesPureGenericNameFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "PISProvidesPureGenericNameFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AllowPISItemEditFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "AllowPISItemEditFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IgnorePISItemDeleteFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "IgnorePISItemDeleteFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IgnorePISItemUpdateFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "IgnorePISItemUpdateFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ProvidesAllergiesFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "ProvidesAllergiesFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReplaceAllergiesFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "ReplaceAllergiesFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ProvidesPatientPhysicalObservationsFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "ProvidesPatientPhysicalObservationsFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "InboundDelayDurationAmount",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "InboundDelayDurationAmount",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "InboundDownDurationAmount",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "InboundDownDurationAmount",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ActiveConnectionFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "ActiveConnectionFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AllowTransferDischargeOfExternalEncounterFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "AllowTransferDischargeOfExternalEncounterFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EditExternalScanCodeLinksFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "EditExternalScanCodeLinksFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MessageLocalDateTimeZoneID",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "MessageLocalDateTimeZoneID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MessageBehindCreatedFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "MessageBehindCreatedFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DiscontinuePharmacyOrderOnMergeFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "DiscontinuePharmacyOrderOnMergeFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LeaveOfAbsenceActionabilityFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "LeaveOfAbsenceActionabilityFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AuthorizationSystemFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "AuthorizationSystemFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DeleteFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "DeleteFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FirstSnapshotFlag",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "FirstSnapshotFlag",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LastModifiedActorKey",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "LastModifiedActorKey",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LastModifiedUTCDateTime",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "LastModifiedUTCDateTime",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LastModifiedBinaryValue",
+									"type": "Byte[]",
+									"physicalType": "timestamp"
+								},
+								"sink": {
+									"name": "LastModifiedBinaryValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -212,7 +646,13 @@
 				"outputs": [
 					{
 						"referenceName": "ds_dl_esrweb_vault",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": {
+								"value": "concat(variables('TargetSchema'),'_',variables('TargetTable')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
