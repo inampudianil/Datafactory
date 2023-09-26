@@ -5,12 +5,16 @@
 			"referenceName": "ls_adls_vault",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "src"
+				"type": "AzureBlobFSLocation"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
