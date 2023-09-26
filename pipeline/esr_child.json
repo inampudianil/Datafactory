@@ -86,8 +86,6 @@
 			{
 				"name": "SQL Get Binary Values",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "SQL Insert Binary Value",
@@ -124,8 +122,6 @@
 			{
 				"name": "SQL Truncate Table DimExternalSystemStage",
 				"type": "Script",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "SQL Get Binary Values",
