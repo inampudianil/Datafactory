@@ -151,6 +151,70 @@
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
 				}
+			},
+			{
+				"name": "Copy DimExternalSystemStage",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "SQL Truncate Table DimExternalSystemStage",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": {
+							"value": "@\"SELECT\n       ess.ExternalSystemSnapshotKey\n      ,es.ExternalSystemKey\n      ,ess.StartUTCDateTime\n      ,ess.StartLocalDateTime\n      ,ess.EndUTCDateTime\n      ,ess.EndLocalDateTime\n      ,ess.ExternalSystemName\n      ,ess.ADTSystemFlag\n      ,ess.PharmacyInformationSystemFlag\n      ,ess.SubscriberFlag\n      ,ess.LegacyCIISafeFlag\n      ,ess.DataManagerFlag\n      ,ess.PISProvidesMedClassFlag\n      ,ess.PISProvidesTherapeuticClassFlag\n      ,ess.PISProvidesPureGenericNameFlag\n      ,ess.AllowPISItemEditFlag\n      ,ess.IgnorePISItemDeleteFlag\n      ,ess.IgnorePISItemUpdateFlag\n      ,ess.ProvidesAllergiesFlag\n      ,ess.ReplaceAllergiesFlag\n      ,ess.ProvidesPatientPhysicalObservationsFlag\n      ,ess.InboundDelayDurationAmount\n      ,ess.InboundDownDurationAmount\n      ,ess.ActiveConnectionFlag\n      ,ess.AllowTransferDischargeOfExternalEncounterFlag\n      ,ess.EditExternalScanCodeLinksFlag\n      ,ess.MessageLocalDateTimeZoneID\n      ,ess.MessageBehindCreatedFlag\n      ,ess.DiscontinuePharmacyOrderOnMergeFlag\n      ,ess.LeaveOfAbsenceActionabilityFlag\n      ,ess.AuthorizationSystemFlag\n      ,ess.DeleteFlag\n      ,COALESCE(ess.FirstSnapshotFlag, 0) AS FirstSnapshotFlag\n\t  ,COALESCE(ess.LastModifiedActorKey, '00000000-0000-0000-0000-000000000000') AS LastModifiedActorKey\n      ,ess.LastModifiedUTCDateTime\n      ,ess.LastModifiedBinaryValue\n  FROM \n       Core.ExternalSystemSnapshot ess\n  INNER JOIN\n       Core.ExternalSystem es\n  ON\n       ess.ExternalSystemKey = es.ExternalSystemKey\n  WHERE \n\t   CAST(ess.LastModifiedBinaryValue AS bigint) >\"+ activity('SQL Get Binary Values').output.firstRow.LastSourceBinaryValue +\" \n  AND \n  \t   CAST(ess.LastModifiedBinaryValue AS bigint) <=\" +activity('SQL Get Binary Values').output.firstRow.NextSourceBinaryValue + \";\"",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"isolationLevel": "ReadCommitted",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "dsoltp_onprem",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_dl_esrweb_vault",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"parameters": {
@@ -177,6 +241,12 @@
 			"TargetTable": {
 				"type": "String",
 				"defaultValue": "DimExternalSystem"
+			},
+			"LastSourceBinaryValue": {
+				"type": "Integer"
+			},
+			"NextSourceBinaryValue": {
+				"type": "Integer"
 			}
 		},
 		"annotations": []

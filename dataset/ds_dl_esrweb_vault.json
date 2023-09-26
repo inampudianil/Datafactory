@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "ProductDescription.txt",
-				"fileSystem": "tgt"
+				"fileSystem": "src"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
