@@ -106,7 +106,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "@concat('SELECT \n LastSourceBinaryValue,\n NextSourceBinaryValue\nFROM\nETL.AdminTrackAuditColumn \nWHERE DeleteFlag = 0\nAND\n    SourceSchema =' , variables('SourceSchema'),\n'AND\n    SourceTable=',variables('SourceTable'),\n'AND\n   TargetSchema=',variables('TargetSchema') ,\n'AND\n  TargetTable=',variables('TargetTable'),';')",
+							"value": "@concat('SELECT \n LastSourceBinaryValue,\n NextSourceBinaryValue\nFROM\nETL.AdminTrackAuditColumn \nWHERE DeleteFlag = 0\nAND\n    SourceSchema =' ,'''', string(variables('SourceSchema')),'''',\n'AND\n    SourceTable=','''',string(variables('SourceTable')),'''',\n'AND\n   TargetSchema=',string(variables('TargetSchema')) ,\n'AND\n  TargetTable=',string(variables('TargetTable')),';')",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
