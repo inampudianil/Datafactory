@@ -106,7 +106,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "@\"SELECT \n LastSourceBinaryValue,\n NextSourceBinaryValue\nFROM\nETL.AdminTrackAuditColumn \nWHERE DeleteFlag = 0\nAND\n    SourceSchema =\" + variables('SourceSchema')+\n\"AND\n    SourceTable=\"+variables('SourceTable')+\n\"AND\n   TargetSchema=\"+variables('TargetSchema') +\n\"AND\n  TargetTable=\"+variables('TargetTable') +\";\"",
+							"value": "@concat('SELECT \n LastSourceBinaryValue,\n NextSourceBinaryValue\nFROM\nETL.AdminTrackAuditColumn \nWHERE DeleteFlag = 0\nAND\n    SourceSchema =' , variables('SourceSchema'),\n'AND\n    SourceTable=',variables('SourceTable'),\n'AND\n   TargetSchema=',variables('TargetSchema') ,\n'AND\n  TargetTable=',variables('TargetTable'),';')",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -155,8 +155,6 @@
 			{
 				"name": "Copy DimExternalSystemStage",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "SQL Truncate Table DimExternalSystemStage",
