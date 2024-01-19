@@ -52,6 +52,14 @@
 				}
 			}
 		],
+		"parameters": {
+			"folderpath": {
+				"type": "string"
+			},
+			"FileName": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }

@@ -1,0 +1,28 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Copy",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"folderpath": "@triggerBody.folderPath",
+					"FileName": "@triggerBody.FileName"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/src/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/0d89d9ab-5883-4e69-a6e5-30c658c1c667/resourceGroups/RG/providers/Microsoft.Storage/storageAccounts/esrwebdav",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
