@@ -1,0 +1,27 @@
+{
+	"name": "ds_dl_esrweb_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_esrwebdav",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "src"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "11000|26|AW00011000||Jon|V|Yang|0|1971-10-06|M||M|jon24@adventure-works.com|90000|2|0|Bachelors|Licenciatura|Bac + 4|Professional|Profesional|Cadre|1|0|3761 N. 14th St||1 (11) 500 555-0162|2011-01-19|1-2 Miles",
+				"type": "String"
+			}
+		]
+	}
+}
