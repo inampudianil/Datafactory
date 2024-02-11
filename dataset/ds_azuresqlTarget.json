@@ -16,7 +16,7 @@
 		"schema": [],
 		"typeProperties": {
 			"table": {
-				"value": "@concat('dbo.',dataset().tableName)",
+				"value": "@dataset().tableName",
 				"type": "Expression"
 			}
 		}
