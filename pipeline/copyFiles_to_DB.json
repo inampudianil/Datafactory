@@ -164,7 +164,25 @@
 											"secureOutput": false,
 											"secureInput": false
 										},
-										"userProperties": []
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": {
+													"value": "@concat('insert into dbo.batchlog(env ,pipelineName,LogMessage,status,TriggerType,loadId,LogTimestamp) Select','dev',pipeline().Pipeline,activity('Copy data1').output.errors,activity('Copy data1').output.executionDetails.status,pipeline().TriggerName,pipeline().RunId,string(utcnow()))",
+													"type": "Expression"
+												},
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"dataset": {
+												"referenceName": "ds_azuresqlTarget",
+												"type": "DatasetReference",
+												"parameters": {
+													"tableName": "metadata"
+												}
+											}
+										}
 									}
 								],
 								"ifTrueActivities": [
