@@ -86,6 +86,21 @@
 									"disableMetricsCollection": false
 								},
 								"enableStaging": false,
+								"enableSkipIncompatibleRow": true,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Warning",
+										"enableReliableLogging": false
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "ls_ADLS",
+											"type": "LinkedServiceReference"
+										},
+										"path": "tgt"
+									}
+								},
 								"translator": {
 									"type": "TabularTranslator",
 									"typeConversion": true,
