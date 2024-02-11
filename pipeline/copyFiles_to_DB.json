@@ -53,7 +53,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "@concat('select * from dbo.Metatdata')",
+							"value": "select * from dbo.Metadata",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
