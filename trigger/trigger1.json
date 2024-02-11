@@ -3,18 +3,7 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [
-			{
-				"pipelineReference": {
-					"referenceName": "Copy",
-					"type": "PipelineReference"
-				},
-				"parameters": {
-					"folderpath": "@triggerBody.folderPath",
-					"FileName": "@triggerBody.FileName"
-				}
-			}
-		],
+		"pipelines": [],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
 			"blobPathBeginsWith": "/src/blobs/",
