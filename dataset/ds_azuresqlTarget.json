@@ -1,0 +1,28 @@
+{
+	"name": "ds_azuresqlTarget",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureSqlDB",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tableName": {
+				"type": "string",
+				"defaultValue": "metadata"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "\"dbo.\"",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tableName",
+				"type": "Expression"
+			}
+		}
+	}
+}
