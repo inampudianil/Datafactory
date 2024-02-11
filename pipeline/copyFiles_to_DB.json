@@ -134,6 +134,73 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Check Copy rows Matches",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(activity('Copy data1').output.rowsRead,activity('Copy data1').output.rowsCopied)",
+									"type": "Expression"
+								},
+								"ifFalseActivities": [
+									{
+										"name": "Lookup2",
+										"type": "Lookup",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": []
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "Lookup1",
+										"type": "Lookup",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": {
+													"value": "@concat('insert into dbo.batchlog(env ,pipelineName,LogMessage,status,TriggerType,loadId,LogTimestamp) Select','dev',pipeline().Pipeline,'Success',activity('Copy data1').output.executionDetails.status,pipeline().TriggerName,pipeline().RunId,string(utcnow()))",
+													"type": "Expression"
+												},
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"dataset": {
+												"referenceName": "ds_azuresqlTarget",
+												"type": "DatasetReference",
+												"parameters": {
+													"tableName": "metadata"
+												}
+											}
+										}
+									}
+								]
+							}
 						}
 					]
 				}
