@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "copyFiles_to_DB",
 	"properties": {
 		"activities": [
 			{
@@ -62,7 +62,10 @@
 					},
 					"dataset": {
 						"referenceName": "ds_azuresqlTarget",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"tableName": "metadata"
+						}
 					},
 					"firstRowOnly": false
 				}
