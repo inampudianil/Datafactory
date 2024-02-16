@@ -22,7 +22,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> source1"
 			]
 		}
 	}
