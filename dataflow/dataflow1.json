@@ -6,10 +6,10 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_adls_source",
+						"referenceName": "ADLSGen2",
 						"type": "DatasetReference"
 					},
-					"name": "adlscurrency"
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -20,10 +20,9 @@
 				"          CurrencyAlternateKey as string,",
 				"          CurrencyName as string",
 				"     ),",
-				"     allowSchemaDrift: false,",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     limit: 100,",
-				"     ignoreNoFilesFound: false) ~> adlscurrency"
+				"     ignoreNoFilesFound: false) ~> source1"
 			]
 		}
 	}
