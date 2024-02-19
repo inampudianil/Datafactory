@@ -49,7 +49,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     partitionBy('hash', 1)) ~> source1",
-				"source1 derive(msg = toString(fromBase64(msg,'UTF-8'))) ~> derivedColumn1",
+				"source1 derive(msg = trim(toString(fromBase64(msg,'Windows-1252')))) ~> derivedColumn1",
 				"derivedColumn1 select(mapColumn(",
 				"          userTime,",
 				"          msg",
