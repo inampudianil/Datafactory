@@ -10,26 +10,62 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "grades.csv",
+				"fileName": "tblSrvMsg.data",
 				"fileSystem": "src"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "|",
 			"rowDelimiter": "\n",
-			"escapeChar": "\"",
+			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "CurrencyKey",
+				"name": "userTime",
 				"type": "String"
 			},
 			{
-				"name": "CurrencyAlternateKey",
+				"name": "msgTime",
 				"type": "String"
 			},
 			{
-				"name": "CurrencyName",
+				"name": "seqNo",
+				"type": "String"
+			},
+			{
+				"name": "programName",
+				"type": "String"
+			},
+			{
+				"name": "machineID",
+				"type": "String"
+			},
+			{
+				"name": "moduleName",
+				"type": "String"
+			},
+			{
+				"name": "functionName",
+				"type": "String"
+			},
+			{
+				"name": "line",
+				"type": "String"
+			},
+			{
+				"name": "severity",
+				"type": "String"
+			},
+			{
+				"name": "errVal",
+				"type": "String"
+			},
+			{
+				"name": "msg",
+				"type": "String"
+			},
+			{
+				"name": "rowStatus\r",
 				"type": "String"
 			}
 		]
