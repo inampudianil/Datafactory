@@ -16,14 +16,23 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          CurrencyKey as string,",
-				"          CurrencyAlternateKey as string,",
-				"          CurrencyName as string",
+				"          userTime as date,",
+				"          msgTime as string,",
+				"          seqNo as string,",
+				"          programName as string,",
+				"          machineID as string,",
+				"          moduleName as string,",
+				"          functionName as string,",
+				"          line as string,",
+				"          severity as string,",
+				"          errVal as string,",
+				"          msg as string,",
+				"          {rowStatus\\r} as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false,",
-				"     partitionBy('hash', 1)) ~> source1"
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> source1"
 			]
 		}
 	}
