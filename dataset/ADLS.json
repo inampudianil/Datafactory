@@ -14,9 +14,10 @@
 				"fileSystem": "tgt"
 			},
 			"columnDelimiter": ",",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
-			"quoteChar": "\""
+			"quoteChar": ""
 		},
 		"schema": []
 	}
