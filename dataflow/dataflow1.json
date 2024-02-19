@@ -20,7 +20,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          userTime as date,",
+				"          userTime as string,",
 				"          msgTime as string,",
 				"          seqNo as string,",
 				"          programName as string,",
@@ -31,7 +31,8 @@
 				"          severity as string,",
 				"          errVal as string,",
 				"          msg as string,",
-				"          {rowStatus\\r} as string",
+				"          rowStatus as string,",
+				"          Prop_12 as string",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",

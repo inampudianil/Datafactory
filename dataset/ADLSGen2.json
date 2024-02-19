@@ -65,7 +65,11 @@
 				"type": "String"
 			},
 			{
-				"name": "rowStatus\r",
+				"name": "rowStatus",
+				"type": "String"
+			},
+			{
+				"name": "Prop_12",
 				"type": "String"
 			}
 		]
