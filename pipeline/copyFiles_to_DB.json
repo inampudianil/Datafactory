@@ -80,6 +80,7 @@
 								},
 								"sink": {
 									"type": "AzureSqlSink",
+									"preCopyScript": "truncate table  [dbo].[DimCurrency]\ntruncate table  [dbo].[DimDepartmentGroup]\ntruncate table  [dbo].[DimProductCategory]\ntruncate table  [dbo].[DimProductSubCategory]\ntruncate table  [dbo].[DimPromotion]",
 									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": true,
 									"disableMetricsCollection": false
