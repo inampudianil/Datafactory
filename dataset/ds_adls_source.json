@@ -15,7 +15,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "DimCurrency.csv",
+				"fileName": {
+					"value": "@dataset().SourceFile",
+					"type": "Expression"
+				},
 				"fileSystem": "src"
 			},
 			"columnDelimiter": ",",
