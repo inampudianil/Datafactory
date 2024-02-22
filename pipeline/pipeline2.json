@@ -86,7 +86,7 @@
 				"type": "Array"
 			},
 			"filecount": {
-				"type": "String"
+				"type": "Integer"
 			}
 		},
 		"annotations": []
