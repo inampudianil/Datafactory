@@ -40,7 +40,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "GetMetadatafromDB",
+						"activity": "Filtering the duration",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -49,7 +49,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('GetMetadatafromDB').output.value",
+						"value": "@activity('Filtering the duration').output.value",
 						"type": "Expression"
 					},
 					"isSequential": true,
@@ -139,6 +139,29 @@
 							]
 						}
 					]
+				}
+			},
+			{
+				"name": "Filtering the duration",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "GetMetadatafromDB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('GetMetadatafromDB').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@not(equals(item().SourceFileName,'/src/duration.csv'))",
+						"type": "Expression"
+					}
 				}
 			}
 		],
