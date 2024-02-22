@@ -1,0 +1,67 @@
+{
+	"name": "Custombatch",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('value')",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "call cube script",
+							"type": "Custom",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"command": {
+									"value": "@concat('python sample.py ',item())",
+									"type": "Expression"
+								},
+								"resourceLinkedService": {
+									"referenceName": "ls_Blob",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "pyfiles",
+								"referenceObjects": {
+									"linkedServices": [],
+									"datasets": []
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "ls_azurebatch",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"value": {
+				"type": "Array",
+				"defaultValue": [
+					1,
+					2,
+					3,
+					4,
+					5
+				]
+			}
+		},
+		"annotations": []
+	}
+}
