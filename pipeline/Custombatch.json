@@ -28,14 +28,14 @@
 							"userProperties": [],
 							"typeProperties": {
 								"command": {
-									"value": "@concat('python sample.py',item())",
+									"value": "@concat('python sample.py ',item())",
 									"type": "Expression"
 								},
 								"resourceLinkedService": {
 									"referenceName": "ls_Blob",
 									"type": "LinkedServiceReference"
 								},
-								"folderPath": "src",
+								"folderPath": "pyfiles",
 								"retentionTimeInDays": 0,
 								"referenceObjects": {
 									"linkedServices": [],
