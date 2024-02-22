@@ -36,6 +36,7 @@
 									"type": "LinkedServiceReference"
 								},
 								"folderPath": "pyfiles",
+								"retentionTimeInDays": -29,
 								"referenceObjects": {
 									"linkedServices": [],
 									"datasets": []
