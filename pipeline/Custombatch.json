@@ -35,7 +35,7 @@
 									"referenceName": "ls_Blob",
 									"type": "LinkedServiceReference"
 								},
-								"folderPath": "pyfiles",
+								"folderPath": "\\pyfiles",
 								"retentionTimeInDays": 0,
 								"referenceObjects": {
 									"linkedServices": [],
