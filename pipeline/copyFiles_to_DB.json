@@ -38,8 +38,6 @@
 			{
 				"name": "loopFiles",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Filtering the duration",
