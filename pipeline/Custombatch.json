@@ -28,7 +28,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"command": {
-									"value": "@concat('python sample.py',item())",
+									"value": "@concat('cmd /C python sample.py',item())\n",
 									"type": "Expression"
 								},
 								"resourceLinkedService": {
