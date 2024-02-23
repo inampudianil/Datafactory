@@ -5,8 +5,6 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
@@ -30,7 +28,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"command": {
-									"value": "cmd /C python sample.py 3",
+									"value": "@concat('python sample.py',item())",
 									"type": "Expression"
 								},
 								"resourceLinkedService": {
@@ -55,6 +53,8 @@
 			{
 				"name": "call cube script_copy1",
 				"type": "Custom",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.00:10:00",
