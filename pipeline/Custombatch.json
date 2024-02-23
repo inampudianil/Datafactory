@@ -5,6 +5,8 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
@@ -48,6 +50,39 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "call cube script_copy1",
+				"type": "Custom",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"command": {
+						"value": "cmd /C python sample.py 3",
+						"type": "Expression"
+					},
+					"resourceLinkedService": {
+						"referenceName": "ls_Blob",
+						"type": "LinkedServiceReference"
+					},
+					"folderPath": "pyfiles",
+					"retentionTimeInDays": 0,
+					"referenceObjects": {
+						"linkedServices": [],
+						"datasets": []
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_azurebatch",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
