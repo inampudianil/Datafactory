@@ -7,6 +7,12 @@
 				"description": "Waittime",
 				"type": "Wait",
 				"dependsOn": [],
+				"userProperties": [
+					{
+						"name": "lastrun",
+						"value": "@utncnow()"
+					}
+				],
 				"typeProperties": {
 					"waitTimeInSeconds": 15
 				}
