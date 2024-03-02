@@ -3,10 +3,17 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Wait1",
+				"name": "Waittime",
+				"description": "Waittime",
 				"type": "Wait",
 				"dependsOn": [],
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "dateNow",
+						"value": "@{utcnow()}"
+					},
+					null
+				],
 				"typeProperties": {
 					"waitTimeInSeconds": 15
 				}
