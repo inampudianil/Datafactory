@@ -7,13 +7,6 @@
 				"description": "Waittime",
 				"type": "Wait",
 				"dependsOn": [],
-				"userProperties": [
-					{
-						"name": "dateNow",
-						"value": "@{utcnow()}"
-					},
-					null
-				],
 				"typeProperties": {
 					"waitTimeInSeconds": 15
 				}
