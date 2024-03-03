@@ -11,6 +11,10 @@
 					{
 						"name": "lastrun",
 						"value": "@utncnow()"
+					},
+					{
+						"name": "TestRun",
+						"value": "My test run"
 					}
 				],
 				"typeProperties": {
